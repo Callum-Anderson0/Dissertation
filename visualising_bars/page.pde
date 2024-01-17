@@ -1,5 +1,6 @@
 class Page{
   ArrayList<Bar> Bars;
+  AdjacencyMatrix AM;
   int barHeight;
   
   Page(int tempBH){
@@ -11,13 +12,19 @@ class Page{
   ArrayList<Bar> generateRandomBars(int x){ 
     ArrayList<Bar> tempBars = new ArrayList<Bar>();
     for(int i = 0; i < x; i++){
-      int random_start = int(random(0,600));
+      //int random_start = int(random(0,600));
+      int random_start = 20;
       int random_size = (int)random(0,600-random_start);
       tempBars.add(new Bar(tempBars.size(),random_start,random_size));
     }
     return tempBars;
   }
 
+  void generateAM(){
+    AM = new AdjacencyMatrix(Bars);
+    AM.initialize();
+    AM.display();
+  }
   
   void display(){
     for(int i = 0;i < Bars.size();i++){
@@ -26,4 +33,3 @@ class Page{
     }
   }
 }
-  
