@@ -13,8 +13,8 @@ class Bar{
     rect(start,id*BH*2,size,BH);
   }
   
-  char compare(Bar other){
-    char symbol = '0';
+  int compare(Bar other){
+    int symbol = -1;
     boolean describe = false;
 
     if(end < other.start){
@@ -22,7 +22,7 @@ class Bar{
         print(id,"left of",other.id,"\n");
         print(other.id,"right of",id,"\n");
       }
-      symbol = '1';
+      symbol = 0;
     }
 
     if(end == other.start){
@@ -31,7 +31,7 @@ class Bar{
         print(other.id,"meets",id,"\n");
       }
 
-      symbol = '2';
+      symbol = 1;
     }
     if(end > other.start && other.start > start && end < other.end){
       if(describe){
@@ -39,29 +39,29 @@ class Bar{
         print(other.id,"overlaps",id,"\n");
       }
 
-      symbol = '3';
+      symbol = 2;
     }
     if(start > other.start && end < other.end){
        if(describe){
           print(id,"inside",other.id,"\n");
           print(other.id,"encloses",id,"\n");
       }
-      symbol = '4';
+      symbol = 3;
     }
-    if(symbol == '0'){
-      char inverse_call = other.compare(this);
+    if(symbol == -1){
+      int inverse_call = other.compare(this);
       switch(inverse_call){
-        case '1':
-          symbol = '5';
+        case 0:
+          symbol = 4;
           break;
-        case '2':
-          symbol = '6';
+        case 1:
+          symbol = 5;
           break;
-        case '3':
-          symbol = '7';
+        case 2:
+          symbol = 6;
           break;
-        case '4':
-          symbol = '8';
+        case 3:
+          symbol = 7;
           break;
       }
     }

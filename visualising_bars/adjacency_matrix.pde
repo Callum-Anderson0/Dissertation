@@ -1,9 +1,9 @@
 class AdjacencyMatrix{
   int numberOfBars;
-  char[][] matrix;
+  int[][] matrix;
   
   AdjacencyMatrix(){
-    matrix = new char[BARS][BARS];
+    matrix = new int[BARS][BARS];
   }
   
   void populate(ArrayList<Bar> bars){
@@ -24,5 +24,39 @@ class AdjacencyMatrix{
       print("\n");
     }
   }
+  
+  void generateGroups(){
+    print("is this running\n");
+    ArrayList<Group> groups = new ArrayList<Group>();
+    for(int j = 0; j < BARS;j++){
+      for(int i = 0; i < RELATIONS;i++){
+         groups.add(new Group(j,i));
+      }
+    }
+    
+    
+    for(int i = 0; i < BARS; i++){
+      for(int j = 0; j < BARS; j++){
+        if(i != j){
+          for(int ii = 0; ii < groups.size();ii++){ // all the groups
+            if(groups.get(ii).id == i && groups.get(ii).symbol == matrix[i][j]){
+              groups.get(ii).addMember(j);
+            }
+          }
+        }
+      }
+    }
+    for(int i = groups.size()-1; i >= 0;i--){
+      if(groups.get(i).members.size() == 0){
+        groups.remove(i);
+      }
+    }
+        
+    for(int i = 0; i < groups.size(); i++){
+       groups.get(i).display();
+    }
+  }
 }
+
+
   
