@@ -1,18 +1,13 @@
 Page p;
-int bars = 5;
+int BARS = 10;
 void setup(){
  size(600,600); 
  background(0);
  p = new Page(20);
- p.Bars = p.generateRandomBars(bars);
+ p.bars = p.generateRandomBars(BARS);
  background(0);
  p.display();
  p.initialiseAM();
- for(int i = 0; i < bars; i++){
-   for(int j = i; j < bars; j++){
-     if(j != i){
-          p.Bars.get(i).compare(p.Bars.get(j));
-     }
- }
- }
+ p.AM.populate(p.bars);
+ p.AM.display();
 }

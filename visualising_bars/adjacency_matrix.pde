@@ -1,31 +1,28 @@
 class AdjacencyMatrix{
-  int elements;
+  int numberOfBars;
   char[][] matrix;
   
-  AdjacencyMatrix(ArrayList<Bar> Bars){
-    elements = Bars.size();
-    matrix = new char[elements][elements];
-    Populate();
-    //Display();
+  AdjacencyMatrix(){
+    matrix = new char[BARS][BARS];
   }
   
-  void Populate(){
-    for(int i = 0; i < elements;i++){
-      for(int j = 0; j < elements;j++){
-        matrix[i][j] = '0';
+  void populate(ArrayList<Bar> bars){
+    for(int i = 0; i < BARS; i++){
+       for(int j = 0; j < BARS; j++){
+          if(j != i){
+          matrix[i][j] = bars.get(i).compare(p.bars.get(j));
+         }
       }
     }
-
   }
-
-  void Display(){
-    for(int i = 0; i < elements;i++){
-      for(int j = 0; j < elements;j++){
-        print("(",i,",",j,"):",matrix[i][j]);
+  
+  void display(){
+    for(int i = 0; i < BARS;i++){
+      for(int j = 0; j < BARS;j++){
+        print(matrix[i][j]," ");
       }
       print("\n");
     }
   }
-
 }
   

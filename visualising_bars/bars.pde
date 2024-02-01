@@ -15,28 +15,37 @@ class Bar{
   
   char compare(Bar other){
     char symbol = '0';
+    boolean describe = false;
 
     if(end < other.start){
-      print(id,"left of",other.id,"\n");
-      print(other.id,"right of",id,"\n");
+      if(describe){
+        print(id,"left of",other.id,"\n");
+        print(other.id,"right of",id,"\n");
+      }
       symbol = '1';
     }
 
     if(end == other.start){
-      print(id,"meets",other.id,"\n");
-      print(other.id,"meets",id,"\n");
+      if(describe){
+        print(id,"meets",other.id,"\n");
+        print(other.id,"meets",id,"\n");
+      }
 
       symbol = '2';
     }
     if(end > other.start && other.start > start && end < other.end){
-      print(id,"overlaps",other.id,"\n");
-      print(other.id,"overlaps",id,"\n");
+      if(describe){
+        print(id,"overlaps",other.id,"\n");
+        print(other.id,"overlaps",id,"\n");
+      }
 
       symbol = '3';
     }
     if(start > other.start && end < other.end){
-      print(id,"inside",other.id,"\n");
-      print(other.id,"encloses",id,"\n");
+       if(describe){
+          print(id,"inside",other.id,"\n");
+          print(other.id,"encloses",id,"\n");
+      }
       symbol = '4';
     }
     if(symbol == '0'){

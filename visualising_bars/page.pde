@@ -1,10 +1,10 @@
 class Page{
-  ArrayList<Bar> Bars;
+  ArrayList<Bar> bars;
   AdjacencyMatrix AM;
   int barHeight;
   
   Page(int tempBH){
-     Bars = new ArrayList<Bar>();
+     bars = new ArrayList<Bar>();
      barHeight = tempBH;
   }
   
@@ -20,13 +20,13 @@ class Page{
   }
 
   void initialiseAM(){
-    AM = new AdjacencyMatrix(Bars);
+    AM = new AdjacencyMatrix();
   }
   
   
   void display(){
-    for(int i = 0;i < Bars.size();i++){
-      Bar b = Bars.get(i);
+    for(int i = 0;i < bars.size();i++){
+      Bar b = bars.get(i);
       b.display(barHeight);
     }
   }
