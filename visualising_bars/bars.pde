@@ -14,30 +14,48 @@ class Bar{
   }
   
   char compare(Bar other){
-    char symbol = 'n';
-    print(start,end,other.start,other.end,"\n");
+    char symbol = '0';
 
     if(end < other.start){
       print(id,"left of",other.id,"\n");
+      print(other.id,"right of",id,"\n");
       symbol = '1';
     }
-    if(other.end < start){
-      print(id,"right",other.id,"\n");
-      symbol='4';
-    }
+
     if(end == other.start){
       print(id,"meets",other.id,"\n");
+      print(other.id,"meets",id,"\n");
+
       symbol = '2';
     }
     if(end > other.start && other.start > start && end < other.end){
-      print(id,"overlaps",other.id,"(with unoverlapped bit at the begginning of the interval)\n");
+      print(id,"overlaps",other.id,"\n");
+      print(other.id,"overlaps",id,"\n");
+
       symbol = '3';
     }
-    if(start < other.start && end > other.end){
-      print(id,"encloses",other.id,"\n");
+    if(start > other.start && end < other.end){
+      print(id,"inside",other.id,"\n");
+      print(other.id,"encloses",id,"\n");
       symbol = '4';
     }
-    
+    if(symbol == '0'){
+      char inverse_call = other.compare(this);
+      switch(inverse_call){
+        case '1':
+          symbol = '5';
+          break;
+        case '2':
+          symbol = '6';
+          break;
+        case '3':
+          symbol = '7';
+          break;
+        case '4':
+          symbol = '8';
+          break;
+      }
+    }
     return symbol;
   }
 }

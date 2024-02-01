@@ -6,7 +6,7 @@ class AdjacencyMatrix{
     elements = Bars.size();
     matrix = new char[elements][elements];
     Populate();
-    Display();
+    //Display();
   }
   
   void Populate(){

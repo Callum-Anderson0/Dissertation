@@ -1,5 +1,5 @@
 Page p;
-int bars = 2;
+int bars = 5;
 void setup(){
  size(600,600); 
  background(0);
@@ -8,7 +8,11 @@ void setup(){
  background(0);
  p.display();
  p.initialiseAM();
- for(int i = 1; i < bars; i++){
-   p.Bars.get(0).compare(p.Bars.get(i));
+ for(int i = 0; i < bars; i++){
+   for(int j = i; j < bars; j++){
+     if(j != i){
+          p.Bars.get(i).compare(p.Bars.get(j));
+     }
+ }
  }
 }
