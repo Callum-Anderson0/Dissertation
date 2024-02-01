@@ -1,33 +1,31 @@
 class AdjacencyMatrix{
-  int initial_dimension;
-  ArrayList<ArrayList<Integer>> matrix;
+  int elements;
+  char[][] matrix;
   
   AdjacencyMatrix(ArrayList<Bar> Bars){
-    initial_dimension = Bars.size();
-    matrix = new ArrayList<ArrayList<Integer>>();
-    for(int i = 0;i<initial_dimension;i++){
-      ArrayList<Integer> row = new ArrayList<Integer>();
-      matrix.add(row);
-    }
+    elements = Bars.size();
+    matrix = new char[elements][elements];
+    Populate();
+    Display();
   }
   
-  void initialize(){
-    for(int i = 0;i<initial_dimension;i++){
-      ArrayList<Integer> tempRow = new ArrayList<Integer>();
-      for(int j = 0;j<initial_dimension;j++){
-        tempRow.add(0);
+  void Populate(){
+    for(int i = 0; i < elements;i++){
+      for(int j = 0; j < elements;j++){
+        matrix[i][j] = '0';
       }
-      matrix.add(tempRow);
+    }
+
+  }
+
+  void Display(){
+    for(int i = 0; i < elements;i++){
+      for(int j = 0; j < elements;j++){
+        print("(",i,",",j,"):",matrix[i][j]);
+      }
+      print("\n");
     }
   }
-  
-  void display(){
-    for(int i = 0;i<initial_dimension;i++){
-      println(matrix.get(i));
-    }
-  }
-  
-  
-  
+
 }
   
