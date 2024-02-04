@@ -15,7 +15,6 @@ class Bar{
   
   int compare(Bar other){
     int symbol = -1;
-    boolean describe = false;
 
     if(end < other.start){
       if(describe){
