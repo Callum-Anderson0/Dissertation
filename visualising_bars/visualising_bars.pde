@@ -1,7 +1,9 @@
 Page p;
 int BARS = 15;
+int BH = 20;
 int RELATIONS = 8;
 int GROUP_MIN_SIZE = 6;
+int BAR_MAX_SIZE = 50;
 boolean describe = false;
 
 String relationDict(int code){
@@ -32,12 +34,17 @@ String relationDict(int code){
 void setup(){
  size(600,600); 
  background(0);
- p = new Page(20);
+ p = new Page();
  p.bars = p.generateRandomBars(BARS);
  background(0);
  p.display();
  p.initialiseAM();
  p.sortGroupsBySize();
- p.displayGroups();
+ p.displayGroup(0);
+ p.colourGroup(0);
  //p.AM.display();
+}
+
+void draw(){
+  
 }

@@ -8,8 +8,7 @@ class Bar{
     size=tempEnd-tempStart;
   }
   
-  void display(int BH){
-    fill(255);
+  void display(){
     rect(start,id*BH*2,size,BH);
     textSize(BH);
     text(id,start,id*BH*2);

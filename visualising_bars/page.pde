@@ -4,9 +4,8 @@ class Page{
   AdjacencyMatrix AM;
   int barHeight;
   
-  Page(int tempBH){
+  Page(){
      bars = new ArrayList<Bar>();
-     barHeight = tempBH;
   }
   
   ArrayList<Bar> generateRandomBars(int x){ 
@@ -51,15 +50,23 @@ class Page{
     }
   }
   
+  void displayGroup(int index){
+    groups.get(index).display();
+  }
+  
   void colourGroup(int index){
-    groups.get(index);
+    fill(0,200,200);
+    for(int i = 0;i < groups.get(index).members.size(); i++){
+      bars.get(groups.get(index).members.get(i)).display();
+    }
   }
   
   
   void display(){
+    fill(255);
     for(int i = 0;i < bars.size();i++){
       Bar b = bars.get(i);
-      b.display(barHeight);
+      b.display();
     }
   }
   
