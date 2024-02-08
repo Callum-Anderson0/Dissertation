@@ -2,8 +2,11 @@ Page p;
 int BARS = 15;
 int BH = 20;
 int RELATIONS = 8;
-int GROUP_MIN_SIZE = 6;
-int BAR_MAX_SIZE = 50;
+int GROUP_MIN_SIZE = 0;
+int BAR_MAX_SIZE = 100;
+int BAR_SIZE = 50;
+String BAR_GENERATION_STYLE = "RANDOM SIZE";
+int[] SYMBOL_WEIGHT = {0,1,1,1,0,1,1,1};
 boolean describe = false;
 
 String relationDict(int code){
@@ -29,7 +32,7 @@ String relationDict(int code){
   return "";
 }
 
-
+int i = 0;
 
 void setup(){
  size(600,600); 
@@ -39,12 +42,16 @@ void setup(){
  background(0);
  p.display();
  p.initialiseAM();
- p.sortGroupsBySize();
- p.displayGroup(0);
- p.colourGroup(0);
+ p.sortGroupsByQuality();
+
+ //p.display();
+
  //p.AM.display();
 }
 
 void draw(){
-  
+  p.display();
+  p.colourGroup(i);
+  delay(2000);
+  i++;
 }
