@@ -11,6 +11,8 @@ class Bar{
   void display(int BH){
     fill(255);
     rect(start,id*BH*2,size,BH);
+    textSize(BH);
+    text(id,start,id*BH*2);
   }
   
   int compare(Bar other){

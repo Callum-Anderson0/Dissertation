@@ -25,15 +25,13 @@ class AdjacencyMatrix{
     }
   }
   
-  void generateGroups(){
-    print("is this running\n");
+  ArrayList<Group> generateGroups(){
     ArrayList<Group> groups = new ArrayList<Group>();
     for(int j = 0; j < BARS;j++){
       for(int i = 0; i < RELATIONS;i++){
          groups.add(new Group(j,i));
       }
     }
-    
     
     for(int i = 0; i < BARS; i++){
       for(int j = 0; j < BARS; j++){
@@ -47,15 +45,14 @@ class AdjacencyMatrix{
       }
     }
     for(int i = groups.size()-1; i >= 0;i--){
-      if(groups.get(i).members.size() == 0){
+      if(groups.get(i).members.size() < GROUP_MIN_SIZE){
         groups.remove(i);
       }
     }
         
-    for(int i = 0; i < groups.size(); i++){
-       groups.get(i).display();
-    }
+   return groups;
   }
+  
 }
 
 

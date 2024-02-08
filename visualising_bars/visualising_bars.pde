@@ -1,26 +1,27 @@
 Page p;
-int BARS = 10;
+int BARS = 15;
 int RELATIONS = 8;
+int GROUP_MIN_SIZE = 6;
 boolean describe = false;
 
 String relationDict(int code){
   switch(code){
     case 0:
-      return "left";
+      return "to the right of";
     case 1:
-      return "follows";
+      return "following";
     case 2:
-      return "overlaps end";
+      return "overlapping the end of";
     case 3:
-      return "inside";
+      return "inside of";
     case 4:
-      return "right";
+      return "to the left of";
     case 5:
-      return "preceeds";
+      return "preceeding";
     case 6:
-      return "overlaps beginning";
+      return "overlapping the beginning of";
     case 7:
-      return "enclose";
+      return "enclosed by";
       
   }
   return "";
@@ -36,7 +37,7 @@ void setup(){
  background(0);
  p.display();
  p.initialiseAM();
- p.AM.populate(p.bars);
- p.AM.generateGroups();
- p.AM.display();
+ p.sortGroupsBySize();
+ p.displayGroups();
+ //p.AM.display();
 }

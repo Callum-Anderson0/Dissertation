@@ -12,7 +12,7 @@ class Group{
   }
   
   void display(){
-    print("Bars related to",id,"by the relation",relationDict(symbol),"are:",members);
+    print("Bars which are",relationDict(symbol),id,"are:",members);
     println();
   }
   
@@ -25,4 +25,17 @@ class Group{
     members.add(index);
   }
   
+  
+  void setSize(){
+    size = members.size();
+  }
+  
+  //ArrayList<Integer> Complement(){
+  //   ArrayList<Integer> nonMembers = new ArrayList<Integer>();
+  //   for(int i = 0; i < BARS; i++){
+  //     for(int j = 0; j < members.size();j++)
+       
+  //   }
+  //   return nonMembers;
+  //  }
 }
