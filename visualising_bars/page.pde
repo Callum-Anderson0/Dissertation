@@ -39,7 +39,7 @@ class Page{
   void initialiseAM(){
     AM = new AdjacencyMatrix();
     AM.populate(p.bars);
-    groups = AM.generateGroups();
+    groups = AM.generateGroupsByFrequency();
   }
   
   void sortGroupsBySize(){

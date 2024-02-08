@@ -5,7 +5,8 @@ int RELATIONS = 8;
 int GROUP_MIN_SIZE = 0;
 int BAR_MAX_SIZE = 100;
 int BAR_SIZE = 50;
-String BAR_GENERATION_STYLE = "RANDOM SIZE";
+int GROUP_PROXIMITY = BARS;
+String BAR_GENERATION_STYLE = "SET SIZE";
 int[] SYMBOL_WEIGHT = {0,1,1,1,0,1,1,1};
 boolean describe = false;
 
@@ -43,7 +44,7 @@ void setup(){
  p.display();
  p.initialiseAM();
  p.sortGroupsByQuality();
-
+ p.AM.findSubTreeGroup(1,0);
  //p.display();
 
  //p.AM.display();
@@ -52,6 +53,9 @@ void setup(){
 void draw(){
   p.display();
   p.colourGroup(i);
-  delay(2000);
+  delay(1000);
   i++;
+  if(i > p.groups.size()-1){
+    i = 0;
+  }
 }
