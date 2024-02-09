@@ -5,10 +5,21 @@ int RELATIONS = 8;
 int GROUP_MIN_SIZE = 0;
 int BAR_MAX_SIZE = 100;
 int BAR_SIZE = 50;
-int GROUP_PROXIMITY = BARS;
-String BAR_GENERATION_STYLE = "SET SIZE";
-int[] SYMBOL_WEIGHT = {0,1,1,1,0,1,1,1};
+int GROUP_PROXIMITY = 3;
+String BAR_GENERATION_STYLE = "RANDOM SIZE";
+float[] SYMBOL_WEIGHT = {0.5,1,1,1,0.5,1,1,1};
 boolean describe = false;
+
+boolean contains(ArrayList<Integer>list,int value){
+  boolean found = false;
+  for(int i = 0; i < list.size();i++){
+    if(list.get(i) == value){
+      found = true;
+    }
+  }
+  return found;
+}
+
 
 String relationDict(int code){
   switch(code){
@@ -44,18 +55,7 @@ void setup(){
  p.display();
  p.initialiseAM();
  p.sortGroupsByQuality();
- p.AM.findSubTreeGroup(1,0);
- //p.display();
+ p.displayGroups();
+ p.colourGroup(0);
 
- //p.AM.display();
-}
-
-void draw(){
-  p.display();
-  p.colourGroup(i);
-  delay(1000);
-  i++;
-  if(i > p.groups.size()-1){
-    i = 0;
-  }
 }

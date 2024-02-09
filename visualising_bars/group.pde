@@ -3,13 +3,15 @@ class Group{
   ArrayList<Integer> members;
   int symbol;
   int size;
+  String generationType;
   float quality;
   
-  Group(int tempId,int tempSymbol){
+  Group(int tempId,int tempSymbol,String type){
     id = tempId;
     symbol = tempSymbol;
     members = new ArrayList<Integer>();
     size = members.size();
+    generationType = type;
 
   }
   
@@ -30,6 +32,10 @@ class Group{
   void setQuality(){
     setSize();
     quality = size*SYMBOL_WEIGHT[symbol];
+  }
+  
+  void disincludeRoot(){
+    members.remove(0);
   }
   
   //ArrayList<Integer> Complement(){

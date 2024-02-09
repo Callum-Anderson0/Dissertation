@@ -41,7 +41,7 @@ class AdjacencyMatrix{
     ArrayList<Group> groups = new ArrayList<Group>();
     for(int j = 0; j < BARS;j++){
       for(int i = 0; i < RELATIONS;i++){
-         groups.add(new Group(j,i));
+         groups.add(new Group(j,i,"FREQUENCY"));
       }
     }
     
@@ -67,7 +67,14 @@ class AdjacencyMatrix{
   
   ArrayList<Group> generateGroupsBySubTree(){
     ArrayList<Group> groups = new ArrayList<Group>();
-    
+    for(int j = 0; j < BARS;j++){
+      for(int i = 0; i < RELATIONS;i++){
+         Group newGroup = new Group(j,i,"SUBTREE");
+         newGroup.members = findSubTreeGroup(j,i);
+         newGroup.disincludeRoot();
+         groups.add(newGroup);
+      }
+    }
     return groups;
   }
   
@@ -75,7 +82,8 @@ class AdjacencyMatrix{
     ArrayList<Integer> visitedNodes = new ArrayList<Integer>();
     ArrayList<Integer> maximalSubtree = new ArrayList<Integer>();
     dfs(root,visitedNodes,maximalSubtree,symbol);
-    print(maximalSubtree);
+  
+    //print(maximalSubtree,"\n");
     return maximalSubtree;
   }
   
@@ -90,16 +98,7 @@ class AdjacencyMatrix{
     }
   }
   
-  boolean contains(ArrayList<Integer>list,int value){
-    boolean found = false;
-    for(int i = 0; i < list.size();i++){
-      if(list.get(i) == value){
-        found = true;
-      }
-    }
-    return found;
-  }
-  
+
 }
 
 
