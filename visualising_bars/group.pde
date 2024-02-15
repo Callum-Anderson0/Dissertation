@@ -17,8 +17,12 @@ class Group{
   
   void display(){
     setQuality();
-    print("Quality:",quality,"Bars which are",relationDict(symbol),id,"are:",members);
-    println();
+    if(generationType == "FREQUENCY"){
+      println("Quality:",quality,"Bars which are",relationDict(symbol),id,"are:",members);
+    }
+    if(generationType == "SUBTREE"){
+      println("Quality:",quality,"Bars in the subtree with the root bar",id,"where members of the group are on the path of relation type",relationDict(symbol)," other members of the group are ",members);
+    }
   }
   
   void addMember(int index){
@@ -36,14 +40,16 @@ class Group{
   
   void disincludeRoot(){
     members.remove(0);
+    
   }
   
-  //ArrayList<Integer> Complement(){
-  //   ArrayList<Integer> nonMembers = new ArrayList<Integer>();
-  //   for(int i = 0; i < BARS; i++){
-  //     for(int j = 0; j < members.size();j++)
-       
-  //   }
-  //   return nonMembers;
-  //  }
+  ArrayList<Integer> Complement(){
+     ArrayList<Integer> nonMembers = new ArrayList<Integer>();
+     for(int i = 0; i < BARS; i++){
+       if(!contains(members,i)){
+         nonMembers.add(i);
+       }
+     }
+     return nonMembers;
+    }
 }

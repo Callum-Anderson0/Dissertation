@@ -1,9 +1,11 @@
 class AdjacencyMatrix{
   int numberOfBars;
   int[][] matrix;
+  Relation[][] Vmatrix;
   
   AdjacencyMatrix(){
     matrix = new int[BARS][BARS];
+    Vmatrix = new Relation[BARS][BARS];
   }
   
   void populate(ArrayList<Bar> bars){
@@ -17,6 +19,20 @@ class AdjacencyMatrix{
     proximityCull();
     display();
   }
+  
+  void VPopulate(ArrayList<VBar> vbars){
+    for(int i = 0; i < BARS; i++){
+      for(int j = i; j < BARS; j++){
+        if(j!=i){
+          Relation entry = new Relation();
+          entry.compare(vbars.get(i),vbars.get(j));
+          Vmatrix[i][j] = entry;
+          Vmatrix[j][i] = entry.inverse();
+        }
+      }
+    }
+  }
+  
   
   void proximityCull(){
     for(int i = 0; i < BARS; i++){

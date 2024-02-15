@@ -1,12 +1,16 @@
 Page p;
-int BARS = 15;
+int BARS = 50;
 int BH = 20;
 int RELATIONS = 8;
 int GROUP_MIN_SIZE = 0;
 int BAR_MAX_SIZE = 100;
+int BAR_MIN_SIZE = 50;
 int BAR_SIZE = 50;
-int GROUP_PROXIMITY = 3;
+int GROUP_PROXIMITY = 2;
+int PROXIMITY_GRANULARITY = 100;
+int ANGLE_GRANULARITY = 6;
 String BAR_GENERATION_STYLE = "RANDOM SIZE";
+String VBAR_GENERATION_STYLE = "EVEN RANDOM";
 float[] SYMBOL_WEIGHT = {0.5,1,1,1,0.5,1,1,1};
 boolean describe = false;
 
@@ -47,15 +51,16 @@ String relationDict(int code){
 int i = 0;
 
 void setup(){
- size(600,600); 
+ size(800,800); 
  background(0);
  p = new Page();
- p.bars = p.generateRandomBars(BARS);
- background(0);
- p.display();
- p.initialiseAM();
- p.sortGroupsByQuality();
- p.displayGroups();
- p.colourGroup(0);
+ //p.oneDfunctionality();
+ p.vbars = p.generateRandomVBars(BARS);
+ stroke(255);
+ p.displayVBars();
+ p.AM.VPopulate(p.vbars);
+}
 
+void draw(){
+  //p.oneDanimate();
 }

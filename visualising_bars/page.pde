@@ -3,9 +3,49 @@ class Page{
   ArrayList<Group> groups;
   AdjacencyMatrix AM;
   int barHeight;
+  int animationIndex = 0;
+  
+  ArrayList<VBar> vbars;
   
   Page(){
      bars = new ArrayList<Bar>();
+     vbars = new ArrayList<VBar>();
+     AM = new AdjacencyMatrix();
+  }
+  
+  ArrayList<VBar> generateRandomVBars(int x){
+    ArrayList<VBar> tempBars = new ArrayList<VBar>();
+    
+    for(int i = 0; i < x;i++){
+      PVector start = new PVector();
+      PVector end = new PVector();
+      VBar candidateVBar;
+      if(VBAR_GENERATION_STYLE == "TRUE RANDOM"){
+        start = new PVector(random(width),random(height));
+        end = new PVector(random(width),random(height));
+      }
+      if(VBAR_GENERATION_STYLE == "EVEN RANDOM"){
+        int randomx = (int)random(BAR_MAX_SIZE,width-BAR_MAX_SIZE);
+        int randomy = (int)random(BAR_MAX_SIZE,height-BAR_MAX_SIZE);
+        start = new PVector(randomx,randomy);
+        PVector randomDirection = PVector.random2D();
+        int randomSize = int(random(BAR_MIN_SIZE,BAR_MAX_SIZE));
+        PVector span = randomDirection.copy().mult(randomSize);
+        
+        end.set(start.copy().add(span));
+        //println(start,span,end);
+      }
+      candidateVBar = new VBar(i,start,end);
+      tempBars.add(candidateVBar);
+
+    }
+    return tempBars;
+  }
+  
+  void displayVBars(){
+    for(int i = 0 ; i < vbars.size();i++){
+      vbars.get(i).display();
+    }
   }
   
   ArrayList<Bar> generateRandomBars(int x){ 
@@ -41,7 +81,7 @@ class Page{
     AM.populate(p.bars);
     //groups = AM.generateGroupsByFrequency();
     groups = AM.generateGroupsBySubTree();
-    s
+    
   }
   
   void sortGroupsBySize(){
@@ -95,6 +135,8 @@ class Page{
     fill(255);
   }
   
+
+  
   
   void display(){
     colorMode(RGB);
@@ -105,5 +147,23 @@ class Page{
     }
   }
   
+  void oneDfunctionality(){
+    bars = generateRandomBars(BARS);
+    display();
+    initialiseAM();
+    sortGroupsByQuality();
+    sortGroupsByQuality();
+    displayGroups();
+    colourGroup(0);
+  }
   
+  void oneDanimate(){
+   display();
+   colourGroup(animationIndex);
+   delay(1000);
+   animationIndex++;
+   if(animationIndex > 10){
+      animationIndex = 0;
+   }
+  }
 }
