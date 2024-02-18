@@ -7,6 +7,7 @@ class Relation{
   int proximity;
   float similarity;
   int angleBetween;
+  float quality;
   
   Relation(){
     intercepting = false;
@@ -20,8 +21,25 @@ class Relation{
     continues = continuesCheck();
     proximity = proximityCheck();
     similarity = similarityCheck();
-    angleBetween = angleBetweenCheck();
-    println(a.id,b.id,intercepting,proximity,angleBetween,similarity);
+    angleBetween = 
+    angleBetweenCheck();
+    calculateQuality();
+    display();
+  }
+  
+  void calculateQuality(){
+    if(intercepting){
+      quality += 1;
+    }
+    if(meets){
+      quality +=1;
+    }
+    if(continues){
+      quality+=1;
+    }
+    quality += proximity;
+    quality += angleBetween;
+    quality += similarity;
   }
   
   boolean interceptingCheck(){
@@ -62,5 +80,9 @@ class Relation{
   
   float similarityCheck(){
     return (a.span.mag()/b.span.mag()); 
+  }
+  
+  void display(){
+    println("Node ids:",a.id,b.id,"Intercepting:",intercepting,"Meets:",meets,"Continues:",continues,"Proximity:",proximity,"Similarity:",similarity,"AngleBetween:",angleBetween,"Overall Quality:",quality);
   }
 }

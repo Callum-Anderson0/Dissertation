@@ -78,7 +78,7 @@ class Page{
 
   void initialiseAM(){
     AM = new AdjacencyMatrix();
-    AM.populate(p.bars);
+    //AM.populate(p.bars);
     //groups = AM.generateGroupsByFrequency();
     //groups = AM.generateGroupsBySubTree();
     
@@ -135,6 +135,52 @@ class Page{
     fill(255);
   }
   
+  void saveBarsToCSV(){
+    Table save = new Table();
+    save.addColumn("id");
+    save.addColumn("start.x");
+    save.addColumn("start.y");
+    save.addColumn("end.x");
+    save.addColumn("end.y");
+    for(int i=0; i < vbars.size();i++){
+      TableRow newRow = save.addRow();
+      newRow.setInt("id",i);
+      newRow.setInt("start.x",(int)vbars.get(i).start.x);
+      newRow.setInt("start.y",(int)vbars.get(i).start.y);
+      newRow.setInt("end.x",(int)vbars.get(i).end.x);
+      newRow.setInt("end.y",(int)vbars.get(i).end.x);
+    }
+    String time = getCurrentDateTime();
+    String path = "data/bars" + time +".csv";
+    saveTable(save,path);
+  }
+  
+  void loadBarsFromCSV(String path){
+    Table load = new Table();
+    load = loadTable(path,"header");
+    for(TableRow row: load.rows()){
+      int id = row.getInt("id");
+      PVector start = new PVector(row.getInt("start.x"),row.getInt("start.y"));
+      PVector end = new PVector(row.getInt("end.x"),row.getInt("end.y"));
+      VBar entry = new VBar(id,start,end);
+      vbars.add(entry);
+    }
+  }
+  
+  String getCurrentDateTime() {
+    int year = year();
+    int month = month();
+    int day = day();
+    int hour = hour();
+    int minute = minute();
+    int second = second();
+    
+    String dateTime = String.format("%04d-%02d-%02d %02d-%02d-%02d", year, month, day, hour, minute, second);
+    return dateTime;
+}
+
+  
+ 
 
   
   

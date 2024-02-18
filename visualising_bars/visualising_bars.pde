@@ -1,15 +1,16 @@
 Page p;
+
 int BARS = 5;
 int BH = 20;
 int RELATIONS = 8;
 int GROUP_MIN_SIZE = 0;
 int BAR_MAX_SIZE = 100;
-int BAR_MIN_SIZE = 10;
+int BAR_MIN_SIZE = 100;
 int BAR_SIZE = 50;
 int GROUP_PROXIMITY = 2;
-int PROXIMITY_GRANULARITY = 100;
+int PROXIMITY_GRANULARITY = 50;
 int SIMILARITY_GRANULARITY = 180;
-int ANGLE_GRANULARITY = 180;
+int ANGLE_GRANULARITY = 5;
 String BAR_GENERATION_STYLE = "RANDOM SIZE";
 String VBAR_GENERATION_STYLE = "EVEN RANDOM";
 String VBAR_STYLE = "LINE";
@@ -61,7 +62,7 @@ void setup(){
  stroke(255);
  p.displayVBars();
  p.AM.VPopulate(p.vbars);
-
+ p.saveBarsToCSV();
 }
 
 void draw(){
