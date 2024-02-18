@@ -61,6 +61,6 @@ class Relation{
   }
   
   float similarityCheck(){
-    return a.span.mag()/b.span.mag(); 
+    return (a.span.mag()/b.span.mag()); 
   }
 }

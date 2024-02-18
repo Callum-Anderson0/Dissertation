@@ -80,7 +80,7 @@ class Page{
     AM = new AdjacencyMatrix();
     AM.populate(p.bars);
     //groups = AM.generateGroupsByFrequency();
-    groups = AM.generateGroupsBySubTree();
+    //groups = AM.generateGroupsBySubTree();
     
   }
   

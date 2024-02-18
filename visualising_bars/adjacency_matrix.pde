@@ -81,23 +81,23 @@ class AdjacencyMatrix{
    return groups;
   }
   
-  ArrayList<Group> generateGroupsBySubTree(){
-    ArrayList<Group> groups = new ArrayList<Group>();
-    for(int j = 0; j < BARS;j++){
-      for(int i = 0; i < RELATIONS;i++){
-         Group newGroup = new Group(j,i,"SUBTREE");
-         newGroup.members = findSubTreeGroup(j,i);
-         newGroup.disincludeRoot();
-         groups.add(newGroup);
-      }
-    }
-    return groups;
-  }
+  //ArrayList<Group> generateGroupsBySubTree(){
+  //  ArrayList<Group> groups = new ArrayList<Group>();
+  //  for(int j = 0; j < BARS;j++){
+  //    for(int i = 0; i < RELATIONS;i++){
+  //       Group newGroup = new Group(j,i,"SUBTREE");
+  //       newGroup.members = findSubTreeGroup(j,i);
+  //       newGroup.disincludeRoot();
+  //       groups.add(newGroup);
+  //    }
+  //  }
+  //  return groups;
+  //}
   
-  ArrayList<Integer> findSubTreeGroup(int root,int symbol){
+  ArrayList<Integer> findSubTreeGroup(int root){
     ArrayList<Integer> visitedNodes = new ArrayList<Integer>();
     ArrayList<Integer> maximalSubtree = new ArrayList<Integer>();
-    dfs(root,visitedNodes,maximalSubtree,symbol);
+    vdfs(root,visitedNodes,maximalSubtree);
   
     //print(maximalSubtree,"\n");
     return maximalSubtree;
@@ -110,6 +110,16 @@ class AdjacencyMatrix{
       boolean inList = contains(visitedNodes,i);
       if(matrix[node][i]==symbol && !inList){
         dfs(i,visitedNodes,maximalSubtree,symbol);
+      }
+    }
+  }
+  void vdfs(int node, ArrayList<Integer> visitedNodes,ArrayList<Integer> maximalSubtree){
+    visitedNodes.add(node);
+    maximalSubtree.add(node);
+    for(int i = 0; i < BARS;i++){
+      boolean inList = contains(visitedNodes,i);
+      if(Vmatrix[node][i].intercepting && !inList){
+        vdfs(i,visitedNodes,maximalSubtree);
       }
     }
   }

@@ -14,13 +14,31 @@ class VBar{
     if(span.x < 0){
       bearing = (PI-bearing)+PI;
     }
+    restyle();
   }
   
   void display(){
     strokeWeight(5);
-    circle(start.x,start.y,5);
+    if(VBAR_STYLE == "VECTOR"){
+      circle(start.x,start.y,5);
+    }
     line(start.x,start.y,end.x,end.y);
     textSize(10);
     text(id,start.x,start.y+20);
+  }
+  
+  void restyle(){
+    if(VBAR_STYLE == "LINE"){
+      if(end.x < start.x){
+        float temp = end.x;
+        end.x = start.x;
+        start.x = temp;
+      }
+      if(end.y < start.y){
+        float temp = end.y;
+        end.y = start.y;
+        start.y = temp;
+      }
+    }
   }
 }
