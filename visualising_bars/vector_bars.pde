@@ -23,7 +23,8 @@ class VBar{
       circle(start.x,start.y,5);
     }
     line(start.x,start.y,end.x,end.y);
-    textSize(10);
+    textSize(20);
+    fill(255,0,0);
     text(id,start.x,start.y+20);
   }
   

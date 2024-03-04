@@ -2,20 +2,15 @@ Page p;
 
 int BARS = 5;
 int BH = 20;
-int RELATIONS = 8;
-int GROUP_MIN_SIZE = 0;
-int BAR_MAX_SIZE = 100;
+int BAR_MAX_SIZE = 200;
 int BAR_MIN_SIZE = 100;
 int BAR_SIZE = 50;
-int GROUP_PROXIMITY = 2;
-int PROXIMITY_GRANULARITY = 50;
-int SIMILARITY_GRANULARITY = 180;
-int ANGLE_GRANULARITY = 5;
 String BAR_GENERATION_STYLE = "RANDOM SIZE";
 String VBAR_GENERATION_STYLE = "EVEN RANDOM";
-String VBAR_STYLE = "LINE";
-float[] SYMBOL_WEIGHT = {0.5,1,1,1,0.5,1,1,1};
-boolean describe = false;
+String VBAR_STYLE = "VECTOR";
+
+String ORDERING = "C";
+
 
 boolean contains(ArrayList<Integer>list,int value){
   boolean found = false;
@@ -58,10 +53,13 @@ void setup(){
  background(0);
  p = new Page();
  //p.oneDfunctionality();
+ //p.loadBarsFromCSV("bars2024-02-18 14-02-52.csv");
  p.vbars = p.generateRandomVBars(BARS);
  stroke(255);
  p.displayVBars();
  p.AM.VPopulate(p.vbars);
+ p.AM.cullProperties(ORDERING);
+ 
  p.saveBarsToCSV();
 }
 
