@@ -42,9 +42,11 @@ class Page{
   
   void displayVBars(){
     for(int i = 0 ; i < vbars.size();i++){
-      vbars.get(i).display();
+      vbars.get(i).display(color(255,0,0));
     }
   }
+  
+  
   
 
 

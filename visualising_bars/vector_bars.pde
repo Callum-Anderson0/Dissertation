@@ -17,14 +17,15 @@ class VBar{
     restyle();
   }
   
-  void display(){
+  void display(color c){
+    stroke(c);
     strokeWeight(5);
     if(VBAR_STYLE == "VECTOR"){
       circle(start.x,start.y,5);
     }
     line(start.x,start.y,end.x,end.y);
     textSize(20);
-    fill(255,0,0);
+    fill(c);
     text(id,start.x,start.y+20);
   }
   

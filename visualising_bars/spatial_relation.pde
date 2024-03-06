@@ -3,7 +3,6 @@ class Relation{
   ArrayList<Property> properties;
   
   
-  
   Relation(){
     properties = new ArrayList<Property>();
   }
@@ -27,7 +26,7 @@ class Relation{
     println();
   }
   
-   ArrayList<String> generateInclusionArray(){
+  ArrayList<String> generateInclusionArray(){
     ArrayList<String> trueSymbols = new ArrayList<String>();
     for(int i = 0; i < properties.size();i++){
       if(properties.get(i).value){
@@ -37,18 +36,24 @@ class Relation{
     return trueSymbols;
   }
   
-  void cullProperties(String logic){
+  void selfParse(ArrayList<Rule> rules){
+    ArrayList<String> symbols = generateInclusionArray();   
+    for(int i = 0; i < rules.size();i++){
+      symbols = rules.get(i).ruleParse(symbols);
+
+    }
+    updateBasedOnParsing(symbols);
+  }
+  
+  void updateBasedOnParsing(ArrayList<String> symbol){
     for(int i = 0; i < properties.size();i++){
       boolean found = false;
-      for(int j = 0; j < logic.length();j++){
-        if(properties.get(i).symbol.equals(str(logic.charAt(j)))){
-          //print("FOUND SHOULD EQUAL TRUE");
+      for(int j = 0; j < symbol.size();j++){
+        if(symbol.get(j).equals(properties.get(i).symbol.toLowerCase())){
           found = true;
         }
       }
-      if(found == false){
-        properties.get(i).value = false;
-      }
+      properties.get(i).value = found && properties.get(i).value;
     }
   }
   
