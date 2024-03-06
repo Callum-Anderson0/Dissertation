@@ -2,6 +2,8 @@ class Relation{
   VBar a,b;
   ArrayList<Property> properties;
   
+  
+  
   Relation(){
     properties = new ArrayList<Property>();
   }
@@ -23,6 +25,16 @@ class Relation{
       print(properties.get(i).getName(),properties.get(i).getValue(),"");
     }
     println();
+  }
+  
+   ArrayList<String> generateInclusionArray(){
+    ArrayList<String> trueSymbols = new ArrayList<String>();
+    for(int i = 0; i < properties.size();i++){
+      if(properties.get(i).value){
+        trueSymbols.add(properties.get(i).symbol);
+      }
+    }
+    return trueSymbols;
   }
   
   void cullProperties(String logic){
@@ -65,6 +77,8 @@ class Relation{
     float distance = dist(a.start.x,a.start.y,b.start.x,b.start.y);
     return distance < maxDistance;
   }
+  
+  
 
   Relation inverse(){
     Relation inverse = new Relation();
