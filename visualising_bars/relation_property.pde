@@ -1,11 +1,13 @@
 class Property{
   String name;
   String symbol;
+  int propagates;
   Boolean value;
   
-  Property(String tempName,Boolean tempValue, String tempSymbol){
+  Property(String tempName,Boolean tempValue, String tempSymbol, int propT){
     name = tempName;
     symbol = tempSymbol;
+    propagates = propT;
     value = tempValue;
   }
   

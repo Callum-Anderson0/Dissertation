@@ -19,14 +19,14 @@ class VBar{
   
   void display(color c){
     stroke(c);
-    strokeWeight(5);
+    strokeWeight(2);
     if(VBAR_STYLE == "VECTOR"){
-      circle(start.x,start.y,5);
+      circle(start.x,start.y,3);
     }
     line(start.x,start.y,end.x,end.y);
-    textSize(20);
+    textSize(15);
     fill(c);
-    text(id,start.x,start.y+20);
+    text(id,start.x,start.y+15);
   }
   
   void restyle(){

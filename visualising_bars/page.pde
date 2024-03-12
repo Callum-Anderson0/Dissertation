@@ -8,8 +8,18 @@ class Page{
   
   Page(){
      vbars = new ArrayList<VBar>();
-     AM = new AdjacencyMatrix();
+     groups = new ArrayList<Group>();
+     AM = new AdjacencyMatrix(BARS);
   }
+  
+  void generateGroups(){
+     ArrayList<ArrayList<Integer>> allGroups = p.AM.defineGroups();
+     for(int i = 0; i < allGroups.size();i++){
+       groups.add(new Group(i,allGroups.get(i),vbars));
+     }
+  }
+  
+  
   
   ArrayList<VBar> generateRandomVBars(int x){
     ArrayList<VBar> tempBars = new ArrayList<VBar>();
@@ -42,7 +52,15 @@ class Page{
   
   void displayVBars(){
     for(int i = 0 ; i < vbars.size();i++){
-      vbars.get(i).display(color(255,0,0));
+      vbars.get(i).display(255);
+    }
+  }
+  
+  void displayGroups(){
+    for(Group group : groups){
+      if(group.members.size()>1){
+        group.display();
+      }
     }
   }
   

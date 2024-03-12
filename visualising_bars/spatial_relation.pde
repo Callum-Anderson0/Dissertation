@@ -11,15 +11,18 @@ class Relation{
     
     a = tempA;
     b = tempB;
-    properties.add(new Property("Intercepting",interceptingCheck(),"A"));
-    properties.add(new Property("Meets",meetsCheck(),"B"));
-    properties.add(new Property("Near",nearCheck(),"C"));
-    
+    properties.add(new Property("Intercepting",interceptingCheck(),"A",1));
+    properties.add(new Property("Meets",meetsCheck(5),"B",0));
+    properties.add(new Property("Near",nearCheck(),"C",0));
+    properties.add(new Property("Aligned",alignedCheck(0.8),"D",0));
+    properties.add(new Property("Continues",continuesCheck(5),"E",0));
+    properties.add(new Property("Shares Start",shareStartCheck(5),"F",0));
+    properties.add(new Property("Preceeds",preceedsCheck(5),"G",0));
     
     //displayRelation();
   }
   void displayRelation(){
-    print(a.id,b.id,":\n");
+    print(a.id,b.id,":");
     for(int i = 0; i < properties.size();i++){
       print(properties.get(i).getName(),properties.get(i).getValue(),"");
     }
@@ -36,28 +39,16 @@ class Relation{
     return trueSymbols;
   }
   
-  void selfParse(ArrayList<Rule> rules){
-    ArrayList<String> symbols = generateInclusionArray();   
-    for(int i = 0; i < rules.size();i++){
-      symbols = rules.get(i).ruleParse(symbols);
-
-    }
-    updateBasedOnParsing(symbols);
-  }
-  
-  void updateBasedOnParsing(ArrayList<String> symbol){
-    for(int i = 0; i < properties.size();i++){
-      boolean found = false;
-      for(int j = 0; j < symbol.size();j++){
-        if(symbol.get(j).equals(properties.get(i).symbol.toLowerCase())){
-          found = true;
-        }
+  boolean anyPropertyTrue(){
+    boolean found = false;
+    for(Property p: properties){
+      if(p.value){
+        found = true;
       }
-      properties.get(i).value = found && properties.get(i).value;
     }
+    return found; 
   }
   
-
   boolean interceptingCheck(){
     float d = (a.start.x - a.end.x) * (b.start.y - b.end.y) - (a.start.y - a.end.y) * (b.start.x - b.end.x);
     if (d == 0){
@@ -69,18 +60,34 @@ class Relation{
     return (t >= 0 && t <= 1 && u >= 0 && u <= 1);
   }
   
-  boolean meetsCheck(){
-    return a.end.x == b.end.x && a.end.y == b.end.y;
+  boolean meetsCheck(int tolerance){
+    return dist(a.end.x,a.end.y,b.end.x,b.end.y) < tolerance;
   }
   
-  boolean continuesCheck(){
-    return a.end.x==b.start.x && a.end.x == b.start.x;
+  boolean continuesCheck(int tolerance){
+     return dist(a.start.x,a.start.y,b.end.x,b.end.y) < tolerance;
+  }
+  
+  boolean shareStartCheck(int tolerance){
+     return dist(a.start.x,a.start.y,b.start.x,b.start.y) < tolerance;
+
   }
   
   boolean nearCheck(){
     float maxDistance = a.span.mag() + b.span.mag();
     float distance = dist(a.start.x,a.start.y,b.start.x,b.start.y);
     return distance < maxDistance;
+  }
+  
+  boolean alignedCheck(float minimumAlignment){
+    //print(a.id,b.id," ");
+    float dotProduct = a.span.copy().normalize().dot(b.span.copy().normalize());
+    //println(dotProduct);
+    return dotProduct > minimumAlignment;
+  }
+  
+  boolean preceedsCheck(int tolerance){
+       return dist(a.end.x,a.end.y,b.start.x,b.start.y) < tolerance;
   }
   
   
